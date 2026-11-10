@@ -132,3 +132,22 @@ should:
 - Implement exactly the spec; if blocked by an open question, stop and surface it (don't assume).
 - Add tests that assert the acceptance criteria by ID.
 - Never introduce remote calls or remote keys (hard constraint).
+
+## 9. Execution: the AgentCI pipeline
+
+The lifecycle above is executed through the **AgentCI pipeline** (see
+[`../agentci/README.md`](../agentci/README.md)): seven specialised subagents — **scout, analyst,
+architect, tester, coder, reviewer, documenter** — each with its own instruction file
+(`agentci/agents/NN-*.md`), a declared context whitelist, a fixed-shape artifact, and a gate.
+Artifacts live in `agentci/runs/<slice-id>/` and are committed.
+
+| Pipeline stage | Lifecycle step in this doc |
+|----------------|----------------------------|
+| analyst | In Review — resolves/escalates open questions (doc 10) |
+| architect | Design — file map, reuse plan, signatures only |
+| tester + coder | Implement + tests — test-first, §5 DoD |
+| reviewer | Verification gate — §5 DoD + NFR invariants, clean checklist |
+| documenter | Change management — §6, Q41, spec → Implemented |
+
+The pipeline is the **mechanism**; this document remains the **process** (rules, DoD, gates).
+Use it for every slice in the §3 build order.

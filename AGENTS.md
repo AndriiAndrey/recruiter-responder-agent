@@ -22,6 +22,19 @@ Project instructions for AI coding agents working in this repo.
 - **Bi-directional input**: an input terminal with an explicit toggle distinguishing each message's sender — (a) the recruiter's pasted messages (opponent), (b) the user's own sent replies, and (c) the user's private notes. All three are part of the history and are provided to the AI as full context.
 - **Local model drafting**: "Generate AI Answer" button per thread → editable draft → user commits.
 
+## Delivery pipeline (AgentCI)
+
+Feature slices are delivered through the **AgentCI pipeline** — seven specialised subagents, each
+with its own instruction file and a small declared context (small context in → consistent output
+out): **scout → analyst → architect → tester → coder → reviewer → documenter**.
+
+- Entry point: [`agentci/README.md`](agentci/README.md) — stage gates, artifact shapes, failure
+  routing, non-negotiables.
+- Per-stage instructions: `agentci/agents/NN-<role>.md` (run in numeric order).
+- Artifacts (committed, one folder per slice): `agentci/runs/<slice-id>/`.
+- Use it for every slice in the `docs/08-workflow.md` §3 build order. The orchestrator spawns each
+  stage with its own file + inputs only, verifies that stage's gate, then moves on.
+
 ## Current state (as of slice 0)
 
 - TanStack Start app is scaffolded and running; `src/routes/index.tsx` is still the demo page — the real UI is not built yet.
