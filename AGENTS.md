@@ -22,13 +22,13 @@ Project instructions for AI coding agents working in this repo.
 - **Bi-directional input**: an input terminal with an explicit toggle distinguishing each message's sender — (a) the recruiter's pasted messages (opponent), (b) the user's own sent replies, and (c) the user's private notes. All three are part of the history and are provided to the AI as full context.
 - **Local model drafting**: "Generate AI Answer" button per thread → editable draft → user commits.
 
-## Current state (as of scaffold)
+## Current state (as of slice 0)
 
 - TanStack Start app is scaffolded and running; `src/routes/index.tsx` is still the demo page — the real UI is not built yet.
-- `src/db/schema.ts` still contains the default `todos` table. Replace/extend it with the recruiter thread + message schema (recruiter name, company, thread ID, message role/sender, body, created-at). The exact schema fields are intentionally open in the PRD — propose a minimal schema consistent with the constraints above.
-- `data/context.md` does not exist yet. Create it as a clearly-marked placeholder the user fills in; never fabricate CV content.
-- No model client code exists yet. Wire it through a server function so the `OPENAI_*` config stays server-side.
+- Slice 0 foundations are in: `src/db/schema.ts` holds the confirmed `threads` + `messages` schema (doc 04), the first migration is generated/applied (`dev.db`), the DDD domain layer exists (`src/domain/thread/` — `Thread` aggregate, `Message`, `MessagePolicy`, invariants I1–I7, unit-tested), and `data/context.md` is a clearly-marked placeholder (never fabricate CV content).
+- No model client code exists yet. Wire it through a server function so the `OPENAI_*` config stays server-side (slice 3, SPEC-03).
 - `README.md` is still the TanStack template — update it once features land.
+- The spec set in `docs/` is fully confirmed (all Q in doc 10, decisions D1–D7) — treat `docs/PRD.md` + `docs/specs/` as the source of truth; build order in `docs/08-workflow.md` §3.
 
 ## Tech stack
 
@@ -51,6 +51,7 @@ npm run db:generate    # drizzle-kit: generate migration from schema changes
 npm run db:migrate     # apply migrations
 npm run db:push        # push schema directly (dev-only)
 npm run db:studio      # drizzle studio
+npm run ci             # check + test + build (definition-of-done gate, Q45)
 ```
 
 ## Code conventions
@@ -61,7 +62,8 @@ npm run db:studio      # drizzle studio
 
 ## Environment
 
-- `.env` / `.env.local` are gitignored. The SQLite file is named by `DATABASE_URL` — set it in `.env` (drizzle-kit reads `.env.local` first) and keep both files consistent.
+- Node **>= 22** is required (enforced via `engines` in `package.json` + `.nvmrc`, Q28).
+- `.env` is **committed** with non-secret local defaults (`DATABASE_URL`, `OPENAI_*` local defaults, doc 07 §3.3); `.env.local` is **gitignored** for machine-specific overrides and secrets. Keep `DATABASE_URL` identical in both (drizzle-kit reads `.env.local` first).
 - The AI endpoint is configured by `OPENAI_BASE_URL` / `OPENAI_API_KEY` / `OPENAI_MODEL_NAME`. It defaults to a **local** endpoint; a remote endpoint is allowed only as an explicit, documented user opt-in. Never hardcode a remote host.
 
 ## Definition of done for a feature

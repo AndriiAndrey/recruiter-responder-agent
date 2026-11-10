@@ -42,6 +42,9 @@ threads (chat) 1 ──< messages
 
 ```ts
 // src/db/schema.ts
+// NOTE: with the installed drizzle-orm 0.45.x the SQLite index helper is `index`
+// (not `sqliteIndex`, which belongs to a newer API) and indexes are declared in the
+// table's third-arg callback — see the actual schema file for the exact form.
 import { sql } from "drizzle-orm";
 import { integer, sqliteTable, text } from "drizzle-orm/sqlite-core";
 

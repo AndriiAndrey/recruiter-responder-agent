@@ -3,7 +3,6 @@ node_modules
 dist
 dist-ssr
 *.local
-.env
 .nitro
 .tanstack
 .wrangler
@@ -12,3 +11,9 @@ dist-ssr
 __unconfig*
 todos.json
 .vscode
+
+# Local SQLite database (created by migrations; named by DATABASE_URL — Q18)
+*.db
+*.db-journal
+*.db-wal
+*.db-shm
