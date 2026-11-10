@@ -8,7 +8,7 @@ and the changelog line below (per `agents/07-documenter.md`).
 
 - v1 (2026-11-10): implemented slice 0 — foundations (schema, DDD domain + tests, env + tooling);
   AgentCI retro run, review `APPROVED`, remediations R1–R3 + F1–F2 shipped — commit
-  `<SHA recorded by the orchestrator in the follow-up docs commit after the slice commit>`.
+  `46bc62c39f5603e098f244ff20c6c3be543ae157`.
 
 ## Edits
 
