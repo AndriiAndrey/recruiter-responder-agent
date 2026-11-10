@@ -109,7 +109,8 @@ Open items are flagged `> [!OPEN Q##]` and tracked in
 
 ## NFR-06 — Maintainability & code quality
 
-- **NFR-06.1 — Lint/format gate:** `npm run check` (Biome) must pass; tabs + double quotes;
+- **NFR-06.1 — Lint/format gate:** `npm run check` (Biome) must pass; formatting per `biome.json`
+  (2-space indent, single quotes for JS, double for JSX attributes, line width 80);
   `routeTree.gen.ts` and `styles.css` are not hand-edited.
 - **NFR-06.2 — Type safety:** TypeScript `strict` mode; no `any` in domain/server code.
 - **NFR-06.3 — Server/client boundary:** All DB and model access lives in server functions.

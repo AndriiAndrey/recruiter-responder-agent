@@ -56,7 +56,7 @@ npm run ci             # check + test + build (definition-of-done gate, Q45)
 
 ## Code conventions
 
-- Biome is the linter/formatter: **tabs for indent, double quotes** for JS/TS. `src/routeTree.gen.ts` and `src/styles.css` are excluded — don't hand-edit the route tree, run `npm run generate-routes` (build) instead.
+- Biome is the linter/formatter: **2-space indent, single quotes for JS strings, double quotes for JSX attributes** (line width 80 — see `biome.json`). `src/routeTree.gen.ts` and `src/styles.css` are excluded — don't hand-edit the route tree, run `npm run generate-routes` (build) instead.
 - Add new routes as files under `src/routes`; use `createFileRoute` and `Link` from `@tanstack/react-router`.
 - Keep all DB and model access in server functions — client components must not import `better-sqlite3` or talk to the model directly.
 

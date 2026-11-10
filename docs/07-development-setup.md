@@ -159,7 +159,8 @@ src/
 
 ### 7.2 Code style (Biome)
 
-- **Tabs** for indentation, **double quotes** (Biome config). Run `npm run check`.
+- **2-space indent, single quotes** for JS strings, **double quotes** for JSX attributes, line width
+  80 (Biome config — `biome.json`). Run `npm run check`.
 - Do **not** hand-edit `src/routeTree.gen.ts` (regenerated on build) or `src/styles.css`
   formatting.
 - TypeScript `strict`; no `any` in `domain/` or `server/`.
