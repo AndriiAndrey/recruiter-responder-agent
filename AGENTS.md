@@ -35,13 +35,14 @@ out): **scout → analyst → architect → tester → coder → reviewer → do
 - Use it for every slice in the `docs/08-workflow.md` §3 build order. The orchestrator spawns each
   stage with its own file + inputs only, verifies that stage's gate, then moves on.
 
-## Current state (as of slice 0)
+## Current state (as of slice 0, verified)
 
+- Slice 0 foundations are in and **verified by an AgentCI run** (`agentci/runs/slice-0/`, review APPROVED): `src/db/schema.ts` holds the confirmed `threads` + `messages` schema (doc 04), the first migration is generated/applied (`dev.db`), the DDD domain layer exists (`src/domain/thread/` — `Thread` aggregate, `Message`, `MessagePolicy`, `types.ts` (VO + errors), explicit named barrel; invariants I1–I7, 40 unit tests), and `data/context.md` is a clearly-marked placeholder (never fabricate CV content).
+- Coverage floors (Q36) are enforceable: `npm run test:coverage` — `src/domain/**` ≥ 90 (measured 100), `src/server/**` ≥ 80 (inert until slice 1).
 - TanStack Start app is scaffolded and running; `src/routes/index.tsx` is still the demo page — the real UI is not built yet.
-- Slice 0 foundations are in: `src/db/schema.ts` holds the confirmed `threads` + `messages` schema (doc 04), the first migration is generated/applied (`dev.db`), the DDD domain layer exists (`src/domain/thread/` — `Thread` aggregate, `Message`, `MessagePolicy`, invariants I1–I7, unit-tested), and `data/context.md` is a clearly-marked placeholder (never fabricate CV content).
 - No model client code exists yet. Wire it through a server function so the `OPENAI_*` config stays server-side (slice 3, SPEC-03).
 - `README.md` is still the TanStack template — update it once features land.
-- The spec set in `docs/` is fully confirmed (all Q in doc 10, decisions D1–D7) — treat `docs/PRD.md` + `docs/specs/` as the source of truth; build order in `docs/08-workflow.md` §3.
+- The spec set in `docs/` is fully confirmed (all Q in doc 10, decisions D1–D8, incl. D8 AgentCI slice conventions) — treat `docs/PRD.md` + `docs/specs/` as the source of truth; build order in `docs/08-workflow.md` §3.
 
 ## Tech stack
 
@@ -60,6 +61,7 @@ npm run lint           # biome lint
 npm run check          # biome lint + format check (run before committing)
 npm run test           # vitest run (unit tests)
 npm run test:watch     # vitest in watch mode
+npm run test:coverage  # vitest run --coverage (Q36 floors: domain ≥ 90, server ≥ 80)
 npm run db:generate    # drizzle-kit: generate migration from schema changes
 npm run db:migrate     # apply migrations
 npm run db:push        # push schema directly (dev-only)

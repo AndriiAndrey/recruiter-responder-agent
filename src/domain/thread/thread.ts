@@ -10,32 +10,14 @@
  */
 import { Message, type MessageRole } from './message.ts';
 import { assertValidBody, assertValidMessage } from './message-policy.ts';
+import { ThreadPolicyError } from './types.ts';
 
-export type ThreadPolicyCode =
-  | 'empty_recruiter_name'
-  | 'empty_company'
-  | 'id_already_assigned'
-  | 'message_not_found';
-
-export class ThreadPolicyError extends Error {
-  readonly code: ThreadPolicyCode;
-
-  constructor(code: ThreadPolicyCode, message: string) {
-    super(message);
-    this.name = 'ThreadPolicyError';
-    this.code = code;
-  }
-}
-
-/** Read-model for the sidebar/tab (doc 05 §3.3). `id` is null until persisted. */
-export interface ThreadSummary {
-  id: number | null;
-  recruiterName: string;
-  company: string;
-  /** Last non-deleted message's createdAt, else the thread's createdAt (Q7 sort key). */
-  lastActivity: number;
-  isDeleted: boolean;
-}
+// Re-exported so existing `./thread.ts` imports (incl. tests) keep working unchanged.
+export {
+  type ThreadPolicyCode,
+  ThreadPolicyError,
+  type ThreadSummary,
+} from './types.ts';
 
 export class Thread {
   private threadId: number | null;

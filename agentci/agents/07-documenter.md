@@ -9,7 +9,9 @@
 
 - `agentci/runs/<slice-id>/review-report.md` (verdict + AC evidence)
 - `agentci/runs/<slice-id>/` (all artifacts — for decision trail)
-- The spec: `docs/specs/{{SPEC_ID}}.md` (Status + Changelog sections)
+- The spec: `docs/specs/{{SPEC_ID}}.md` (Status + Changelog sections). **Spec-less (setup)
+  slices (gap P1):** no spec file — doc 08 §3 (slice row) + the run artifacts are the record
+  source instead
 - `docs/08-workflow.md` §6 (change management), `docs/10-open-questions-and-decisions.md`
 - `AGENTS.md` (current-state + conventions sections), `docs/README.md` (index)
 
@@ -26,6 +28,8 @@ Doc edits (make only what the slice requires):
 
 1. **Spec `{{SPEC_ID}}`**: `Status` → `Implemented` + link to the commit; append a
    **Changelog** line (Q41): `v<N> (date): implemented slice <id> — <one line>; commit <sha>`.
+   **Spec-less slices (gap P1):** no spec file — mark the slice done in the doc 08 §3 build
+   order instead, and carry the changelog line in `doc-changelog.md`.
 2. **`docs/10-open-questions-and-decisions.md`**: if the slice answered a question or made a
    non-trivial choice — add/confirm the Q or append an ADR row (D8+). If "What's still open"
    or the build-order status changed (doc 08 §3 slice row), update it.
@@ -45,7 +49,8 @@ Then write `doc-changelog.md`: table of `file | section | change | why` — one 
 
 ## Gate (orchestrator verifies)
 
-- [ ] Spec status `Implemented` + changelog line with commit SHA
+- [ ] Spec status `Implemented` + changelog line with commit SHA (spec-less: doc 08 §3
+      marked done + changelog line in `doc-changelog.md`)
 - [ ] `doc-changelog.md` present; every edit listed
 - [ ] `npm run check` still green (markdown is outside Biome's scope, but re-run the gate to
       be sure nothing else drifted)

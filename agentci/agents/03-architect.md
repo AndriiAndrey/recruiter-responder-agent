@@ -5,6 +5,14 @@ surface. Signatures and structure only; **no implementation code**.
 
 **Slice:** `{{SLICE_ID}}` · **Spec:** `{{SPEC_ID}}`
 
+## Modes (gap P4)
+
+- **Forward (default):** the slice is not built yet — produce sections 1–7 below.
+- **Retro (as-built audit):** the slice already exists (rehearsal/legacy). Section 1 becomes
+  an audit of the as-built file map (size + compliance per rule); sections 2–4 become rule
+  checks; sections 5–7 are replaced by a **remediation plan** table
+  (`# | change | AC | justification`) that the coder stage executes.
+
 ## Inputs (read only these)
 
 - `agentci/runs/<slice-id>/analyst-brief.md`
@@ -62,12 +70,14 @@ Required sections:
 
 ## Rules (design quality bar)
 
-- **Files as small as possible.** Target ≤ ~150 lines per file; anything planned > ~200 lines
-  must be split by responsibility or justified in one line.
+- **Files as small as possible (gap P5).** Target ≤ ~150 lines per file. > ~200 lines
+  requires a one-line justification in the plan; > ~300 lines or a second concern ⇒
+  mandatory split (no justification possible).
 - **Entity gets a folder.** New component/page/model ⇒ own folder with related files
   (component, types, utils, test) — no loose single-file entities.
-- **Barrel discipline.** Each folder's `index.ts(x)` exports **only** what is consumed outside
-  the folder — list the exact export set in the plan.
+- **Barrel discipline (gap P6).** Each folder's `index.ts(x)` uses **explicit named exports —
+  never `export *`** — of the public API consumed outside the folder; list the exact export
+  set in the plan. Once consumers exist, unused exports are dead weight (reviewer audits).
 - **Reuse before add.** If the scout list has a fit, the plan must use it; a new shared util
   needs a one-line reason the existing one doesn't fit.
 - **Layer discipline.** Business rules live in `src/domain` (pure); queries in repositories;

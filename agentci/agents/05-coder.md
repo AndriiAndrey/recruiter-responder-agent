@@ -26,6 +26,9 @@ nothing less.
 
 - Implementation code at the plan's exact paths, `npm run ci` green.
 - No artifact file — the code + green gates are the output (the reviewer inspects the diff).
+- **Retro runs (gap P4):** execute the architect's remediation plan (R##) instead of a new
+  implementation; the same gates apply, and "never edit a test" holds (a fix made by the
+  tester in a loop is legitimate — it was not made by you).
 
 ## Rules (stack best practices)
 

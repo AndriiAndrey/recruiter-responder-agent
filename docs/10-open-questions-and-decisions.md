@@ -112,7 +112,7 @@ Legend — **Status:** `Open` (needs you) · `Proposed` (default set, confirm to
 
 ## Decision log (Architecture Decision Records)
 
-All six are now **Confirmed** per the 2026 answers. Reversing a decision requires a new ADR entry
+All are now **Confirmed** (D1–D8). Reversing a decision requires a new ADR entry
 (append, don't delete).
 
 | ID | Decision | Rationale | Linked Q | Status |
@@ -124,6 +124,7 @@ All six are now **Confirmed** per the 2026 answers. Reversing a decision require
 | **D5** | **Web server binds to loopback by default** (configurable); the **model endpoint** (`OPENAI_BASE_URL`) is configurable (local default, remote opt-in). | Single-user app stays private by default; the model can be hosted remotely later. | Q23 | **Confirmed** |
 | **D6** | **Streaming** generation into the editable field. | Fast first-token feedback, progress, abort; best UX for model latency. | Q11 | **Confirmed** |
 | **D7** | Each chat is **one main, linear Thread**; **no status, no archive**; Threads are **soft-deletable only** (no sub-threads, no hard delete). | User: no status needed; one main thread per chat; a chat is only soft-deletable. | Q3, Q4 | **Confirmed** |
+| **D8** | **AgentCI conventions for spec-less and retro slices:** setup slices (no spec file) use the doc 08 §3 slice row + its cited docs as the spec stand-in, with derived ACs (`AC-<slice>-##`, marked *derived*); retro runs audit shipped code (as-built architect mode → remediation plan R## executed by the coder); invariants owned by later slices are `deferred → <slice>` in the test map; discovered pipeline gaps (P##) are fixed in the agent files by the orchestrator. | The slice-0 rehearsal exposed contract gaps P1–P7 (see `agentci/runs/slice-0/` artifacts); codifying them makes setup/audit runs first-class instead of ad-hoc. | — (process, 📝) | **Confirmed** |
 
 > **Process:** to confirm a `Proposed` item, set its `Status` to `Confirmed` and (for a decision)
 > set the decision `Status` to `Confirmed`. The specs that depend on it can then move to **Approved**

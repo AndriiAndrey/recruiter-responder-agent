@@ -61,6 +61,11 @@ Ordered so each slice is runnable and testable, and later slices reuse earlier p
 > Slices 3 and 4 can partly parallelize. Full-text search is **out of v1** (Q7 confirmed) — slice 5
 > is chat soft-delete only.
 
+> **Slice status (2026-11-10):** 0 — **Implemented** and verified through an AgentCI run
+> ([`agentci/runs/slice-0/`](../agentci/runs/slice-0/), review `APPROVED`): schema, DDD domain +
+> tests, env + tooling per doc 04/05/07 + Q18–Q21, Q28, Q36, Q44, Q45. Slices 1–5: not started;
+> slice 1 (SPEC-01) is next.
+
 ---
 
 ## 4. Branching & commit conventions (Q40 confirmed)

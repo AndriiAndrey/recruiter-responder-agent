@@ -41,6 +41,18 @@ context in → consistent output out.
  7. DOCUMENTER → docs synced + commit "spec → Implemented, changelog, AGENTS.md state"
 ```
 
+## Slice kinds
+
+- **Spec slices** (normal): `{{SPEC_ID}}` is a file in `docs/specs/`; its ACs are copied
+  verbatim into the analyst brief.
+- **Spec-less (setup) slices** (gaps P1/P2, e.g. slice 0 in doc 08 §3): no spec file — stages
+  use the doc 08 §3 slice row + the docs it cites as the spec stand-in; the analyst derives
+  ACs (`AC-<slice>-##`, marked *derived*); the documenter records "done" in doc 08 §3 instead
+  of a spec status.
+- **Retro runs** (gap P4): the pipeline audits already-shipped code (rehearsal). The
+  architect runs as-built audit mode and emits a remediation plan (R##); the tester audits
+  the existing suite (T##); coder and reviewer otherwise behave as forward.
+
 ## Artifacts (one folder per slice)
 
 ```

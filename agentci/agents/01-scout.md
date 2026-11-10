@@ -8,6 +8,9 @@
 
 - `agentci/README.md` (pipeline context)
 - The assigned spec: `docs/specs/{{SPEC_ID}}.md` (goal, scope, interfaces sections)
+- **Spec-less (setup) slices (gap P1):** no spec file exists (e.g. doc 08 §3 row 0) — use
+  the slice row in `docs/08-workflow.md` §3 + the docs it cites (doc 04/05/07, Qs) as the
+  spec stand-in, and say so in the report header
 - `docs/03-architecture.md` §2–§3 (component + server-function map)
 - The repo, **read-only**: `src/`, `docs/10-open-questions-and-decisions.md` (status column only)
 

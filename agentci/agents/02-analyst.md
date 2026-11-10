@@ -29,6 +29,9 @@ Required sections:
 3. **Acceptance criteria checklist** — every `AC-##` from the spec as a checkbox item with its
    requirement ID. This list is the reviewer's grading sheet — copy it verbatim, do not
    paraphrase.
+   **Spec-less slices (gap P2):** no spec file ⇒ no verbatim ACs. Derive the checklist from
+   the doc 08 §3 slice row + the confirmed Qs/docs it cites; tag each item `AC-<slice>-##`,
+   mark the section *derived*, and name the source per item.
 4. **Confirmed decisions that shape this slice** — the Q##/D## (with one-line effect) that the
    brief relies on.
 5. **Blocking questions** — anything needed to design that has no confirmed answer.

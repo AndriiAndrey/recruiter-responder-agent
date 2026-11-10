@@ -49,6 +49,10 @@ Required sections:
 
 ## Rules
 
+- **Retro runs (gap P4):** audit already-shipped code — same gates, same report shape;
+  evidence comes from existing files + the diff of the loop's remediations; findings from
+  earlier stages of the same run (R##/F##/T##) are tracked to resolution in the findings
+  table.
 - Run the gates yourself; never trust a reported "it's green".
 - Grep for the invariants (`import .* from ".*server"`, `fetch(`, `axios`, `http://`,
   `https://` outside `OPENAI_BASE_URL` usage) — evidence over impression.

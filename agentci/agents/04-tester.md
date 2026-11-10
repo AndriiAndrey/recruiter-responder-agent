@@ -25,13 +25,17 @@
    (`src/domain/thread/thread.test.ts` pattern) — written against the plan's exact
    signatures. Importing not-yet-implemented modules is **expected** (that is RED).
 2. **`agentci/runs/<slice-id>/test-plan.md`** — required sections:
-   - **AC → test map**: every `AC-##` → `test file :: test name` (1:1 minimum; an AC with no
-     test means the slice is not doable — flag it)
+   - **AC → test map**: every `AC-##` → `test file :: test name` (1:1 minimum). An invariant
+     that is inherently owned by a later slice (its code doesn't exist yet) is listed as
+     `deferred → <slice>, <reason>` (gap P7) — an AC with neither a test nor a deferral
+     means the slice is not doable: flag it
    - **Kinds**: which tests are pure domain / server-with-fakes / jsdom components
    - **Guardrail obligations** (if the slice touches AI): the D3 guardrail tests per
      doc 09 §2.5
    - **Expected RED state**: `npm run test` output shape (which suites fail and why —
      unimplemented imports)
+   - **Retro runs (gap P4):** audit the existing suite against the AC map instead of writing
+     RED tests; report test-quality findings (T##, blocking or not) for the reviewer
 
 ## Rules (stack best practices)
 

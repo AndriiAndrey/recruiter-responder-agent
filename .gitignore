@@ -17,3 +17,6 @@ todos.json
 *.db-journal
 *.db-wal
 *.db-shm
+
+# Coverage reports (npm run test:coverage)
+coverage/

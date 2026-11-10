@@ -62,6 +62,12 @@ We combine two approaches:
 
 ## Current state of the repo (baseline this set is written against)
 
+> **Updated with slice 0 (2026-11-10):** the pre-slice-0 baseline below is kept for history.
+> Current state: slice 0 delivered — `threads`/`messages` schema + first migration (`drizzle/`),
+> consistent `.env`/`.env.local` (`DATABASE_URL="dev.db"`, `ANTHROPIC_API_KEY` removed),
+> DDD domain + 40 unit tests in `src/domain/thread/`, `data/context.md` placeholder. Verified by
+> the AgentCI run [`agentci/runs/slice-0/`](../agentci/runs/slice-0/) (review `APPROVED`).
+
 - TanStack Start scaffold runs; `src/routes/index.tsx` is still the demo page — no real UI yet.
 - `src/db/schema.ts` still holds the default `todos` table (to be replaced).
 - No `data/context.md`, no `src/components`, no `drizzle/` migrations.
@@ -73,5 +79,5 @@ We combine two approaches:
 > **Status:** all open questions are resolved — every Q in
 > [`10-open-questions-and-decisions.md`](./10-open-questions-and-decisions.md) is `Confirmed`
 > (including the non-blocking round: platform-agnostic code, MVP = unit tests only, model-status
-> indicator as must-have). **SPEC-01…04 are `Approved`**; build order per doc 08 §3, starting with
-> slice 0.
+> indicator as must-have). **SPEC-01…04 are `Approved`**; build order per doc 08 §3 —
+> **slice 0 is Implemented**, slice 1 (SPEC-01) is next.

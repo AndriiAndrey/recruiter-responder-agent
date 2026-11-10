@@ -83,6 +83,18 @@ describe('Thread (SPEC-01 / doc 05 §3.1)', () => {
       ]);
     });
 
+    it('I2: ties on createdAt are broken by id (insertion order)', () => {
+      const thread = newThread();
+      thread.addMessage('recruiter', 'first', T0 + step);
+      thread.addMessage('recruiter', 'second', T0 + step);
+      thread.addMessage('recruiter', 'third', T0 + step);
+      expect(thread.activeMessages().map((m) => m.body)).toEqual([
+        'first',
+        'second',
+        'third',
+      ]);
+    });
+
     it('I3: rejects an empty body', () => {
       const thread = newThread();
       expect(() => thread.addMessage('recruiter', '   ', T0 + step)).toThrow(
