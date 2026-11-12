@@ -28,21 +28,28 @@ Feature slices are delivered through the **AgentCI pipeline** — seven speciali
 with its own instruction file and a small declared context (small context in → consistent output
 out): **scout → analyst → architect → tester → coder → reviewer → documenter**.
 
-- Entry point: [`agentci/README.md`](agentci/README.md) — stage gates, artifact shapes, failure
+- Entry point: [`agentci/README.md`](agentci/README.md) — stage gates, brief contract, failure
   routing, non-negotiables.
 - Per-stage instructions: `agentci/agents/NN-<role>.md` (run in numeric order).
-- Artifacts (committed, one folder per slice): `agentci/runs/<slice-id>/`.
+- **One shared brief per slice** (D9, committed): `agentci/runs/<DD.MM.YY>_<work-title>.md`
+  (date prefix = the day the brief is created; title = the work to be done, short +
+  readable; created from `agentci/template/brief.md`).
+  Every stage appends its section — append-only work summaries; the **analyst section is the
+  user review gate** (findings with pros/cons + questions; pipeline stops until answered);
+  every stage from architect onward shows **decision compliance**; a rolling **open-items
+  ledger** (§8) tracks questions/findings/risks/decision changes (decisions kept as current
+  state — rows edited in place, change recorded in the ledger).
 - Use it for every slice in the `docs/08-workflow.md` §3 build order. The orchestrator spawns each
-  stage with its own file + inputs only, verifies that stage's gate, then moves on.
+  stage with its own file + the brief + inputs only, verifies that stage's gate, then moves on.
 
 ## Current state (as of slice 0, verified)
 
-- Slice 0 foundations are in and **verified by an AgentCI run** (`agentci/runs/slice-0/`, review APPROVED): `src/db/schema.ts` holds the confirmed `threads` + `messages` schema (doc 04), the first migration is generated/applied (`dev.db`), the DDD domain layer exists (`src/domain/thread/` — `Thread` aggregate, `Message`, `MessagePolicy`, `types.ts` (VO + errors), explicit named barrel; invariants I1–I7, 40 unit tests), and `data/context.md` is a clearly-marked placeholder (never fabricate CV content).
+- Slice 0 foundations are in and **verified by an AgentCI run** (`agentci/runs/10.11.26_foundations.md`, review APPROVED): `src/db/schema.ts` holds the confirmed `threads` + `messages` schema (doc 04), the first migration is generated/applied (`dev.db`), the DDD domain layer exists (`src/domain/thread/` — `Thread` aggregate, `Message`, `MessagePolicy`, `types.ts` (VO + errors), explicit named barrel; invariants I1–I7, 40 unit tests), and `data/context.md` is a clearly-marked placeholder (never fabricate CV content).
 - Coverage floors (Q36) are enforceable: `npm run test:coverage` — `src/domain/**` ≥ 90 (measured 100), `src/server/**` ≥ 80 (inert until slice 1).
 - TanStack Start app is scaffolded and running; `src/routes/index.tsx` is still the demo page — the real UI is not built yet.
 - No model client code exists yet. Wire it through a server function so the `OPENAI_*` config stays server-side (slice 3, SPEC-03).
 - `README.md` is still the TanStack template — update it once features land.
-- The spec set in `docs/` is fully confirmed (all Q in doc 10, decisions D1–D8, incl. D8 AgentCI slice conventions) — treat `docs/PRD.md` + `docs/specs/` as the source of truth; build order in `docs/08-workflow.md` §3.
+- The spec set in `docs/` is fully confirmed (all Q in doc 10, decisions D1–D9, incl. D8 AgentCI slice conventions + D9 single shared brief per slice) — treat `docs/PRD.md` + `docs/specs/` as the source of truth; build order in `docs/08-workflow.md` §3.
 
 ## Tech stack
 

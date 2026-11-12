@@ -62,7 +62,7 @@ Ordered so each slice is runnable and testable, and later slices reuse earlier p
 > is chat soft-delete only.
 
 > **Slice status (2026-11-10):** 0 — **Implemented** and verified through an AgentCI run
-> ([`agentci/runs/slice-0/`](../agentci/runs/slice-0/), review `APPROVED`): schema, DDD domain +
+> ([`agentci/runs/10.11.26_foundations.md`](../agentci/runs/10.11.26_foundations.md), review `APPROVED`): schema, DDD domain +
 > tests, env + tooling per doc 04/05/07 + Q18–Q21, Q28, Q36, Q44, Q45. Slices 1–5: not started;
 > slice 1 (SPEC-01) is next.
 
@@ -143,8 +143,13 @@ should:
 The lifecycle above is executed through the **AgentCI pipeline** (see
 [`../agentci/README.md`](../agentci/README.md)): seven specialised subagents — **scout, analyst,
 architect, tester, coder, reviewer, documenter** — each with its own instruction file
-(`agentci/agents/NN-*.md`), a declared context whitelist, a fixed-shape artifact, and a gate.
-Artifacts live in `agentci/runs/<slice-id>/` and are committed.
+(`agentci/agents/NN-*.md`), a declared context whitelist, a fixed-shape section, and a gate.
+All stages work inside **one shared brief per slice** —
+`agentci/runs/<DD.MM.YY>_<work-title>.md` (D9; date prefix = the day the brief is created): the scout creates it from the template,
+every stage appends its section, the analyst's section is the **user review gate** (the
+pipeline stops until every question in it is answered), each stage from architect onward
+shows **decision compliance**, and a rolling **open-items ledger** tracks questions,
+findings, risks, and decision changes. Briefs are committed.
 
 | Pipeline stage | Lifecycle step in this doc |
 |----------------|----------------------------|

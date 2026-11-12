@@ -1,17 +1,26 @@
 # AGENT 5/7 — CODER
 
-**Job:** implement exactly the architect's plan until the suite is GREEN — nothing more,
-nothing less.
+**Job:** fill §5 of the shared brief (work summary) and implement exactly the architect's
+plan until the suite is GREEN — nothing more, nothing less, in line with every prior
+decision.
 
 **Slice:** `{{SLICE_ID}}` · **Spec:** `{{SPEC_ID}}`
 
 ## Inputs (read only these)
 
-- `agentci/runs/<slice-id>/architect-plan.md` (the contract — file map + signatures)
+- The shared brief `agentci/runs/<DD.MM.YY>_<work-title>.md` — **all of §1–§4** (plan =
+  the contract: §3 file map + signatures; §4 = the tester's AC → test map)
 - The test files from the tester stage (the acceptance contract — read them before coding)
-- `agentci/runs/<slice-id>/analyst-brief.md` (AC list, only when a test seems to intend more
-  than the plan says)
 - `AGENTS.md` (stack conventions) + the specific files being modified
+
+## Shared-brief rules (D9)
+
+- Append **only** §5; never edit or delete other sections (work summaries are history).
+- You may edit **only**: your §5, the implementation files, and §8 (add rows; update
+  statuses you resolve).
+- **If the plan contradicts an answered §2.4 decision, or is ambiguous/impossible as
+  written: stop** — add a §8 ledger entry (`finding` or `decision-change`) and let the
+  orchestrator route it (architect / analyst → user). No guessing, no silent workarounds.
 
 ## Forbidden
 
@@ -25,8 +34,14 @@ nothing less.
 ## Output
 
 - Implementation code at the plan's exact paths, `npm run ci` green.
-- No artifact file — the code + green gates are the output (the reviewer inspects the diff).
-- **Retro runs (gap P4):** execute the architect's remediation plan (R##) instead of a new
+- **§5 of the shared brief** (the work summary):
+  - **Decision compliance line** — each §2.4 answer / §3.0 row you implemented against,
+    one line each (where it lives in the code).
+  - **Work summary** — files implemented vs the §3.1 file map; any deviation (split/merge)
+    with its one-line justification; retro runs: the R## items executed.
+  - **DoD results** — `npm run check` / `npm run test` / `npm run build` outcomes (and
+    `test:coverage` if the floor is owed).
+- **Retro runs (D8):** execute the architect's remediation plan (R##) instead of a new
   implementation; the same gates apply, and "never edit a test" holds (a fix made by the
   tester in a loop is legitimate — it was not made by you).
 
@@ -68,5 +83,6 @@ nothing less.
 
 - [ ] `npm run ci` exits 0
 - [ ] `git diff` shows **zero changes to test files**
-- [ ] Every file in the diff is in the plan's file map (or a justified split of one)
+- [ ] Every file in the diff is in the §3.1 file map (or a justified split of one)
 - [ ] No client import of `src/db`/`src/server` (grep)
+- [ ] §5 present in the brief with decision-compliance line + DoD results

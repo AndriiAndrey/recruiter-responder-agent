@@ -66,7 +66,7 @@ We combine two approaches:
 > Current state: slice 0 delivered — `threads`/`messages` schema + first migration (`drizzle/`),
 > consistent `.env`/`.env.local` (`DATABASE_URL="dev.db"`, `ANTHROPIC_API_KEY` removed),
 > DDD domain + 40 unit tests in `src/domain/thread/`, `data/context.md` placeholder. Verified by
-> the AgentCI run [`agentci/runs/slice-0/`](../agentci/runs/slice-0/) (review `APPROVED`).
+> the AgentCI run [`agentci/runs/10.11.26_foundations.md`](../agentci/runs/10.11.26_foundations.md) (review `APPROVED`).
 
 - TanStack Start scaffold runs; `src/routes/index.tsx` is still the demo page — no real UI yet.
 - `src/db/schema.ts` still holds the default `todos` table (to be replaced).
